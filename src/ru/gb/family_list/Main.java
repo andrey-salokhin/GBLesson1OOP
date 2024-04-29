@@ -2,12 +2,14 @@ package ru.gb.family_list;
 
 import ru.gb.family_list.family.FamilyList;
 import ru.gb.family_list.human.Human;
+import ru.gb.family_list.writer.FileHandler;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         Human mgf = new Human("GrandFather", "gf", new GregorianCalendar(1925, Calendar.MARCH, 12), Human.Gender.MALE);
         mgf.setDod(new GregorianCalendar(2004, Calendar.DECEMBER, 1));
@@ -23,10 +25,10 @@ public class Main {
         FamilyList fl = new FamilyList();
 
         fl.addHumans(mgf, mgm, fgf, fgm, m, f, me, br, sis);
-        fl.showFullList();
 
-        System.out.println("\n");
-
-        fl.showAllChidsByHuman(m);
+        FileHandler fh = new FileHandler();
+        fh.write(fl, "data");
+        FamilyList restoredFamily = (FamilyList) fh.read("data");
+        restoredFamily.showFullList();
     }
 }

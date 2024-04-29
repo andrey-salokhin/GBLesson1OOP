@@ -1,9 +1,10 @@
 package ru.gb.family_list.human;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Human {
+public class Human implements Serializable {
 
     public enum Gender {
         MALE, FEMALE;
