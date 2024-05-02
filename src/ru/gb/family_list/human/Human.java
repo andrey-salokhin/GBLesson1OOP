@@ -2,7 +2,10 @@ package ru.gb.family_list.human;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Human implements Serializable {
 
@@ -70,6 +73,22 @@ public class Human implements Serializable {
     public Human getFather() {
         return father;
     }
+
+
+    public int getAge() {
+        if(dod != null) {
+            return Period.between(getLocalDate(dob), getLocalDate(dod)).getYears();
+        } else {
+            return Period.between(getLocalDate(dob), LocalDate.now()).getYears();
+        }
+    }
+
+    private LocalDate getLocalDate (Calendar calendar) {
+        return new GregorianCalendar(
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)).toZonedDateTime().toLocalDate();
+        }
 
     @Override
     public String toString() {

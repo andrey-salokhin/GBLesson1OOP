@@ -1,12 +1,15 @@
 package ru.gb.family_list.family;
 
 import ru.gb.family_list.human.Human;
+import ru.gb.family_list.human.comparator.HumanComparatorByAge;
+import ru.gb.family_list.human.comparator.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyList implements Serializable {
+public class FamilyList implements Serializable, Iterable<Human> {
 
     private final List<Human> list;
 
@@ -41,5 +44,18 @@ public class FamilyList implements Serializable {
                 }
             }
         }
+    }
+
+    public void sortByAge() {
+        list.sort(new HumanComparatorByAge());
+    }
+
+    public void sortByName () {
+        list.sort(new HumanComparatorByName());
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new FamilyIterator(list);
     }
 }

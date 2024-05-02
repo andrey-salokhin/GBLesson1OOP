@@ -26,9 +26,22 @@ public class Main {
 
         fl.addHumans(mgf, mgm, fgf, fgm, m, f, me, br, sis);
 
-        FileHandler fh = new FileHandler();
-        fh.write(fl, "data");
-        FamilyList restoredFamily = (FamilyList) fh.read("data");
-        restoredFamily.showFullList();
+//        FileHandler fh = new FileHandler();
+//        fh.write(fl, "data");
+//        FamilyList restoredFamily = (FamilyList) fh.read("data");
+//        restoredFamily.showFullList();
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Human human: fl) {
+            stringBuilder.append(human.getName());
+            stringBuilder.append("\n");
+        }
+        System.out.println(stringBuilder.toString());
+
+        fl.sortByAge();
+        fl.showFullList();
+        System.out.println("------------------------");
+        fl.sortByName();
+        fl.showFullList();
     }
 }
