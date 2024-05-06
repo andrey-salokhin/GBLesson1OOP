@@ -1,5 +1,7 @@
 package ru.gb.family_list.human;
 
+import ru.gb.family_list.family.FamilyListItem;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -7,11 +9,11 @@ import java.time.Period;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Human implements Serializable {
+public class Human implements Serializable, FamilyListItem {
 
     public enum Gender {
-        MALE, FEMALE;
-    };
+        MALE, FEMALE
+    }
 
     private String name;
     private String surname;

@@ -1,16 +1,14 @@
 package ru.gb.family_list.family;
 
-import ru.gb.family_list.human.Human;
-
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyIterator implements Iterator<Human> {
+public class FamilyIterator<E extends FamilyListItem> implements Iterator<E> {
 
     private int index;
-    private List<Human> familyList;
+    private final List<E> familyList;
 
-    FamilyIterator(List<Human> familyList) {
+    FamilyIterator(List<E> familyList) {
         this.familyList = familyList;
     }
 
@@ -20,7 +18,7 @@ public class FamilyIterator implements Iterator<Human> {
     }
 
     @Override
-    public Human next() {
+    public E next() {
         return familyList.get(index++);
     }
 }

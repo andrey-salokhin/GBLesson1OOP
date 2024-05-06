@@ -1,6 +1,7 @@
 package ru.gb.family_list;
 
 import ru.gb.family_list.family.FamilyList;
+import ru.gb.family_list.family.FamilyListItem;
 import ru.gb.family_list.human.Human;
 import ru.gb.family_list.writer.FileHandler;
 
@@ -22,7 +23,7 @@ public class Main {
         Human br = new Human("Br", "Human1Surname", new GregorianCalendar(2016, Calendar.NOVEMBER, 21), Human.Gender.MALE, m, f);
         Human sis = new Human("Sis", "Human1Surname", new GregorianCalendar(2020, Calendar.APRIL, 3), Human.Gender.FEMALE, m, f);
 
-        FamilyList fl = new FamilyList();
+        FamilyList<FamilyListItem> fl = new FamilyList<>();
 
         fl.addHumans(mgf, mgm, fgf, fgm, m, f, me, br, sis);
 
@@ -32,10 +33,11 @@ public class Main {
 //        restoredFamily.showFullList();
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (Human human: fl) {
+        for (FamilyListItem human: fl) {
             stringBuilder.append(human.getName());
             stringBuilder.append("\n");
         }
+
         System.out.println(stringBuilder.toString());
 
         fl.sortByAge();

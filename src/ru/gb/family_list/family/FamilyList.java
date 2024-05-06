@@ -9,33 +9,33 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyList implements Serializable, Iterable<Human> {
+public class FamilyList<E extends FamilyListItem> implements Serializable, Iterable<E> {
 
-    private final List<Human> list;
+    private final List<E> list;
 
     public FamilyList() {
         this.list = new ArrayList<>();
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(E human) {
         list.add(human);
     }
 
-    public void addHumans(Human... humans) {
-        for (Human human : humans) {
+    public void addHumans(E... humans) {
+        for (E human : humans) {
             addHuman(human);
         }
     }
 
     public void showFullList() {
-        for (Human human : list) {
+        for (E human : list) {
             System.out.println(human);
         }
     }
 
-    public void showAllChidsByHuman(Human human) {
+    public void showAllChildByHuman(E human) {
         if (this.list.contains(human)) {
-            for (Human listed_human : list) {
+            for (E listed_human : list) {
                 if (listed_human.getFather() != null && human.getGender() == Human.Gender.MALE && listed_human.getFather().equals(human)) {
                     System.out.println(listed_human);
                 }
@@ -47,15 +47,15 @@ public class FamilyList implements Serializable, Iterable<Human> {
     }
 
     public void sortByAge() {
-        list.sort(new HumanComparatorByAge());
+        list.sort(new HumanComparatorByAge<>());
     }
 
     public void sortByName () {
-        list.sort(new HumanComparatorByName());
+        list.sort(new HumanComparatorByName<>());
     }
 
     @Override
-    public Iterator iterator() {
-        return new FamilyIterator(list);
+    public Iterator<E> iterator() {
+        return new FamilyIterator<>(list);
     }
 }
