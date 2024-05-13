@@ -1,6 +1,6 @@
-package ru.gb.family_list.human;
+package ru.gb.family_list.model.human;
 
-import ru.gb.family_list.family.FamilyListItem;
+import ru.gb.family_list.model.family.FamilyListItem;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -96,7 +96,7 @@ public class Human implements Serializable, FamilyListItem {
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
-        String dobString = sdf.format(dob.getTime());
+        String dobString = (dob != null) ? sdf.format(dob.getTime()): "Неизвестно";
         String dodString = (dod != null) ? sdf.format(dod.getTime()) : "Неизвестно";
 
         String motherName = (mother != null) ? mother.getName() : "Неизвестно";

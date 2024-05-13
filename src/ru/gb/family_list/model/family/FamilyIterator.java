@@ -1,4 +1,4 @@
-package ru.gb.family_list.family;
+package ru.gb.family_list.model.family;
 
 import java.util.Iterator;
 import java.util.List;

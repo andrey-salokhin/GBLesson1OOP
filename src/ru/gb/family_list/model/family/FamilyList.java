@@ -1,8 +1,8 @@
-package ru.gb.family_list.family;
+package ru.gb.family_list.model.family;
 
-import ru.gb.family_list.human.Human;
-import ru.gb.family_list.human.comparator.HumanComparatorByAge;
-import ru.gb.family_list.human.comparator.HumanComparatorByName;
+import ru.gb.family_list.model.human.Human;
+import ru.gb.family_list.model.human.comparator.HumanComparatorByAge;
+import ru.gb.family_list.model.human.comparator.HumanComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,10 +27,14 @@ public class FamilyList<E extends FamilyListItem> implements Serializable, Itera
         }
     }
 
-    public void showFullList() {
+    public String getFullList() {
+        StringBuilder sb = new StringBuilder();
+        int index = 0;
         for (E human : list) {
-            System.out.println(human);
+            sb.append("INDEX: " + index + "   " + human.toString() +"\n");
+            index++;
         }
+        return sb.toString();
     }
 
     public void showAllChildByHuman(E human) {
@@ -45,6 +49,13 @@ public class FamilyList<E extends FamilyListItem> implements Serializable, Itera
             }
         }
     }
+
+    public E getHumanByIndex(Integer index) {
+        if (index != null && index >= 0 && index < list.size()) {
+            return list.get(index);
+        }
+        return null;
+    };
 
     public void sortByAge() {
         list.sort(new HumanComparatorByAge<>());

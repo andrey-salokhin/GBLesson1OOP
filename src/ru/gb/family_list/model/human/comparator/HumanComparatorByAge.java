@@ -1,6 +1,6 @@
-package ru.gb.family_list.human.comparator;
+package ru.gb.family_list.model.human.comparator;
 
-import ru.gb.family_list.family.FamilyListItem;
+import ru.gb.family_list.model.family.FamilyListItem;
 import java.util.Comparator;
 
 public class HumanComparatorByAge<E extends FamilyListItem> implements Comparator<E> {

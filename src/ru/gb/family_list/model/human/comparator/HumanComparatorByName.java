@@ -1,7 +1,7 @@
-package ru.gb.family_list.human.comparator;
+package ru.gb.family_list.model.human.comparator;
 
 import java.util.Comparator;
-import ru.gb.family_list.family.FamilyListItem;
+import ru.gb.family_list.model.family.FamilyListItem;
 
 public class HumanComparatorByName<E extends FamilyListItem> implements Comparator<E> {
     @Override
