@@ -2,6 +2,9 @@ package ru.gb.family_list.view;
 
 import ru.gb.family_list.model.human.Human;
 import ru.gb.family_list.presenter.Presenter;
+import ru.gb.family_list.view.commands.CommandsList;
+
+import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -10,57 +13,58 @@ public class ConsoleUi implements View{
    private Scanner scanner;
    private Presenter presenter;
    private boolean status;
+   private CommandsList cl;
 
     public ConsoleUi() {
             scanner = new Scanner(System.in);
             presenter = new Presenter(this);
             status = true;
+            cl = new CommandsList(this);
     }
 
     @Override
-    public void start() {
+    public void start() throws IOException, ClassNotFoundException {
         while (status) {
-            System.out.println("1. Add student");
-            System.out.println("2. Get full family list");
-            System.out.println("3. Sort by name");
-            System.out.println("4. Sort by age");
-            System.out.println("5. Exit");
-            String line = scanner.nextLine();
-            switch (line) {
-                case "1":
-                    addHuman();
-                    break;
-                case "2":
-                    getFullList();
-                    break;
-                case "3":
-                    sortByName();
-                    break;
-                case "4":
-                    sortByAge();
-                    break;
-                case "5":
-                    finish();
-                    break;
-                default:
-                    System.out.println("Incorrect value!");
-            }
+            printCommands();
+            execute();
         }
     }
 
-    private void sortByAge() {
+    private void execute() throws IOException, ClassNotFoundException {
+        int commandNumber = Integer.parseInt(scanner.nextLine());
+        if(commandNumber - 1 < cl.getCommands().size()){
+            cl.execute(commandNumber - 1);
+        } else {
+            System.out.println("Incorrect value!");
+        }
+    }
+
+    public void sortByAge() {
         presenter.sortByAge();
     }
 
-    private void sortByName() {
+    public void sortByName() {
         presenter.sortByName();
     }
 
-    private void getFullList() {
+    public void getFullList() {
         presenter.getFullList();
     }
 
-    private void addHuman() {
+    public void save() throws IOException {
+        System.out.println("Print path");
+        String path = scanner.nextLine();
+        presenter.save(path);
+    }
+
+    public void read() throws IOException, ClassNotFoundException {
+        System.out.println("Print path");
+        String path = scanner.nextLine();
+        presenter.read(path);
+        presenter.getFullList();
+    }
+
+    public void addHuman() {
         System.out.println("Print name");
         String name = scanner.nextLine();
         System.out.println("Print surname");
@@ -81,7 +85,7 @@ public class ConsoleUi implements View{
         presenter.addHuman(name, surname, dob, gender, !momIndex.isEmpty() ? Integer.parseInt(momIndex) : null, !dadIndex.isEmpty() ? Integer.parseInt(dadIndex) : null);
     }
 
-    private void finish(){
+    public void finish(){
         status = false;
         System.out.println("Goodbye!");
     }
@@ -92,6 +96,10 @@ public class ConsoleUi implements View{
             case "2" -> Human.Gender.FEMALE;
             default -> null;
         };
+    }
+
+    private void printCommands(){
+        System.out.println(cl.getStringCommands());
     }
 
     @Override

@@ -4,6 +4,7 @@ import ru.gb.family_list.model.human.Human;
 import ru.gb.family_list.model.service.Service;
 import ru.gb.family_list.view.View;
 
+import java.io.IOException;
 import java.util.GregorianCalendar;
 
 public class Presenter {
@@ -32,5 +33,13 @@ public class Presenter {
     public void sortByName() {
         service.sortByName();
         getFullList();
+    }
+
+    public void save(String path) throws IOException {
+        service.save(path);
+    }
+
+    public void read(String path) throws IOException, ClassNotFoundException {
+        service.read(path);
     }
 }

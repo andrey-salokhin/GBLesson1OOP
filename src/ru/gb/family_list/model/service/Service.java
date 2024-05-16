@@ -2,7 +2,9 @@ package ru.gb.family_list.model.service;
 
 import ru.gb.family_list.model.family.FamilyList;
 import ru.gb.family_list.model.human.Human;
+import ru.gb.family_list.writer.FileHandler;
 
+import java.io.IOException;
 import java.util.GregorianCalendar;
 
 public class Service {
@@ -27,5 +29,16 @@ public class Service {
 
     public void sortByName() {
         fl.sortByName();
+    }
+
+    public void save(String path) throws IOException {
+        FileHandler fh = new FileHandler();
+        fh.write(fl, path);
+    }
+
+    public void read(String path) throws IOException, ClassNotFoundException {
+        FileHandler fh = new FileHandler();
+        fl = (FamilyList<Human>) fh.read(path);
+        fl.getFullList();
     }
 }
