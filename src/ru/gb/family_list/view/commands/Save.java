@@ -10,7 +10,7 @@ public class Save extends Command{
     }
 
     @Override
-    public void execute() throws IOException {
+    public void execute() {
         cui.save();
     }
 }

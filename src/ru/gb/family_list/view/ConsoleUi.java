@@ -3,6 +3,7 @@ package ru.gb.family_list.view;
 import ru.gb.family_list.model.human.Human;
 import ru.gb.family_list.presenter.Presenter;
 import ru.gb.family_list.view.commands.CommandsList;
+import ru.gb.family_list.writer.FileHandlerList;
 
 import java.io.IOException;
 import java.util.GregorianCalendar;
@@ -51,16 +52,22 @@ public class ConsoleUi implements View{
         presenter.getFullList();
     }
 
-    public void save() throws IOException {
+    public void save() {
         System.out.println("Print path");
         String path = scanner.nextLine();
-        presenter.save(path);
+        System.out.println("Print number of handler");
+        printFileHandlers();
+        String handler = scanner.nextLine();
+        presenter.save(path, Integer.parseInt(handler));
     }
 
-    public void read() throws IOException, ClassNotFoundException {
+    public void read() {
         System.out.println("Print path");
         String path = scanner.nextLine();
-        presenter.read(path);
+        System.out.println("Print number of filetype");
+        System.out.println(presenter.getStringHandlers());
+        String filetype = scanner.nextLine();
+        presenter.read(path, Integer.parseInt(filetype));
         presenter.getFullList();
     }
 
@@ -100,6 +107,14 @@ public class ConsoleUi implements View{
 
     private void printCommands(){
         System.out.println(cl.getStringCommands());
+    }
+
+    private void printFileHandlers(){
+        System.out.println(presenter.getStringHandlers());
+    }
+
+    private void printAvailableFIleTypes() {
+        System.out.println(presenter.getAvailableFileTypes());
     }
 
     @Override

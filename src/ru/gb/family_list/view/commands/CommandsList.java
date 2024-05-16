@@ -17,6 +17,7 @@ public class CommandsList {
         commandsList.add(new SortByAge(cui));
         commandsList.add(new Save(cui));
         commandsList.add(new Read(cui));
+        commandsList.add(new Exit(cui));
     }
 
     public List<Command> getCommands() {

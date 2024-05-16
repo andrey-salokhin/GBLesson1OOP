@@ -2,16 +2,21 @@ package ru.gb.family_list.model.service;
 
 import ru.gb.family_list.model.family.FamilyList;
 import ru.gb.family_list.model.human.Human;
+import ru.gb.family_list.writer.DocFileHandler;
 import ru.gb.family_list.writer.FileHandler;
+import ru.gb.family_list.writer.FileHandlerList;
+import ru.gb.family_list.writer.SerializableFileHandler;
 
 import java.io.IOException;
 import java.util.GregorianCalendar;
 
 public class Service {
     FamilyList<Human> fl;
+    private FileHandlerList fhl;
 
     public Service() {
         this.fl = new FamilyList<>();
+        this.fhl = new FileHandlerList();
     }
 
     public void addHuman(String name, String surname, GregorianCalendar dob, Human.Gender gender, Integer mother, Integer father) {
@@ -31,14 +36,22 @@ public class Service {
         fl.sortByName();
     }
 
-    public void save(String path) throws IOException {
-        FileHandler fh = new FileHandler();
+    public void save(String path, Integer handler) {
+        FileHandler fh = fhl.getFileHandlerByIndex(handler-1);
         fh.write(fl, path);
     }
 
-    public void read(String path) throws IOException, ClassNotFoundException {
-        FileHandler fh = new FileHandler();
+    public void read(String path, Integer filetype) {
+        FileHandler fh = fhl.getFileHandlerByIndex(filetype-1);
         fl = (FamilyList<Human>) fh.read(path);
         fl.getFullList();
+    }
+
+    public String getStringHandlers() {
+        return fhl.getStringHandlers();
+    }
+
+    public String getAvailableFileTypes() {
+        return fhl.getFileTypes();
     }
 }

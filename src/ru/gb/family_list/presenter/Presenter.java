@@ -35,11 +35,19 @@ public class Presenter {
         getFullList();
     }
 
-    public void save(String path) throws IOException {
-        service.save(path);
+    public void save(String path, Integer handler) {
+        service.save(path, handler);
     }
 
-    public void read(String path) throws IOException, ClassNotFoundException {
-        service.read(path);
+    public void read(String path, Integer handler) {
+        service.read(path, handler);
+    }
+
+    public String getStringHandlers() {
+        return service.getStringHandlers();
+    }
+
+    public String getAvailableFileTypes() {
+        return service.getAvailableFileTypes();
     }
 }

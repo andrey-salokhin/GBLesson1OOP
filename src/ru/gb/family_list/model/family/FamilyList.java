@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FamilyList<E extends FamilyListItem> implements Serializable, Iterable<E> {
+public class FamilyList<E extends FamilyListItem> implements Serializable, Iterable<E>, Stringable {
 
     private final List<E> list;
 
@@ -63,6 +63,11 @@ public class FamilyList<E extends FamilyListItem> implements Serializable, Itera
 
     public void sortByName () {
         list.sort(new HumanComparatorByName<>());
+    }
+
+    @Override
+    public String getStringedData() {
+        return getFullList();
     }
 
     @Override
